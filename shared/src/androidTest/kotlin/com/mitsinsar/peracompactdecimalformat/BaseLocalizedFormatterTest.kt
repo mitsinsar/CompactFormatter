@@ -1,48 +1,62 @@
 package com.mitsinsar.peracompactdecimalformat
 
-interface BaseLocalizedFormatterTest {
+import java.math.BigDecimal
 
-    // fun `check if negative throws exception`()
+abstract class BaseLocalizedFormatterTest {
 
-    fun `check if minimum small number works`()
+    protected lateinit var formatter: PeraCompactDecimalFormat
 
-    fun `check if random small number works`()
+    abstract fun `check if minimum small number works`()
 
-    fun `check if maximum small number works`()
+    abstract fun `check if random small number works`()
 
-    fun `check if minimum thousand works`()
+    abstract fun `check if maximum small number works`()
 
-    fun `check if random thousand works`()
+    abstract fun `check if minimum thousand works`()
 
-    fun `check if maximum thousand works`()
+    abstract fun `check if random thousand works`()
 
-    fun `check if minimum million works`()
+    abstract fun `check if maximum thousand works`()
 
-    fun `check if mid million works`()
+    abstract fun `check if minimum million works`()
 
-    fun `check if max million works`()
+    abstract fun `check if mid million works`()
 
-    fun `check if minimum billion works`()
+    abstract fun `check if max million works`()
 
-    fun `check if random billion works`()
+    abstract fun `check if minimum billion works`()
 
-    fun `check if maximum billion works`()
+    abstract fun `check if random billion works`()
 
-    fun `check if minimum trillion works`()
+    abstract fun `check if maximum billion works`()
 
-    fun `check if random trillion works`()
+    abstract fun `check if minimum trillion works`()
 
-    fun `check if maximum trillion works`()
+    abstract fun `check if random trillion works`()
 
-    fun `check if minimum quadrillion works`()
+    abstract fun `check if maximum trillion works`()
 
-    fun `check if random quadrillion works`()
+    abstract fun `check if minimum quadrillion works`()
 
-    fun `check if maximum quadrillion works`()
+    abstract fun `check if random quadrillion works`()
 
-    fun `check if minimum quintillion works`()
+    abstract fun `check if maximum quadrillion works`()
 
-    fun `check if random quintillion works`()
+    abstract fun `check if minimum quintillion works`()
 
-    fun `check if max UINT64 works`()
+    abstract fun `check if random quintillion works`()
+
+    abstract fun `check if max UINT64 works`()
+
+    protected fun assertFormattedNumber(
+        rawNumber: String,
+        expectedFormattedNumber: String,
+        expectedSuffix: String
+    ): Boolean {
+        val number = BigDecimal(rawNumber)
+        val formattedCompactDecimal = formatter.format(number)
+        return with(formattedCompactDecimal) {
+            this.number == number && formattedNumber == expectedFormattedNumber && suffix == expectedSuffix
+        }
+    }
 }
