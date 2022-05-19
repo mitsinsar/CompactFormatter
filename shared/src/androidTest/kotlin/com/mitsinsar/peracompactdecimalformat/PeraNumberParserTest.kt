@@ -5,6 +5,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import java.math.BigDecimal
+import kotlin.test.assertTrue
 
 @RunWith(JUnit4::class)
 class PeraNumberParserTest {
@@ -18,7 +19,13 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("0"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("0") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 0
+            }
+        }
     }
 
     @Test
@@ -30,7 +37,13 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("512.25213125"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("512.25213125") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 0
+            }
+        }
     }
 
     @Test
@@ -42,7 +55,13 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("124125.25213125"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("124.12525213125") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 1
+            }
+        }
     }
 
     @Test
@@ -54,7 +73,14 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("5.12412525213125"))
+
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("5.12412525213125") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 2
+            }
+        }
     }
 
     @Test
@@ -66,7 +92,13 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("124.12525224124123"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("124.12525224124123") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 3
+            }
+        }
     }
 
     @Test
@@ -78,7 +110,13 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("1.234567891234567890"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("1.234567891234567890") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 4
+            }
+        }
     }
 
     @Test
@@ -90,7 +128,13 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("1.234567891234567890"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("1.234567891234567890") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 5
+            }
+        }
     }
 
     @Test
@@ -102,6 +146,12 @@ class PeraNumberParserTest {
         val parsedNumber = parseNumber(minimumNumber)
 
         // Then
-        assert(parsedNumber == BigDecimal("1.234567891234567890"))
+        assertTrue {
+            with(parsedNumber) {
+                this.parsedNumber == BigDecimal("1.234567891234567890") &&
+                    rawNumber == minimumNumber &&
+                    shiftCount == 6
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.mitsinsar.peracompactdecimalformat
 
 import com.mitsinsar.peracompactdecimalformat.locals.TurkishLocale
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,6 +15,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
     fun setup() {
         formatter = PeraCompactDecimalFormatBuilder.getInstance()
             .setLocale(TurkishLocale())
+            .excludeShorteningNumber(NumberConstants.THOUSAND)
             .build()
     }
 
@@ -23,7 +25,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "0",
                 expectedFormattedNumber = "0,00",
-                expectedSuffix = ""
+                expectedSuffix = null
             )
         }
     }
@@ -34,7 +36,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "214.42521321324123",
                 expectedFormattedNumber = "214,42",
-                expectedSuffix = ""
+                expectedSuffix = null
             )
         }
     }
@@ -45,7 +47,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "999.999999999",
                 expectedFormattedNumber = "999,99",
-                expectedSuffix = ""
+                expectedSuffix = null
             )
         }
     }
@@ -56,7 +58,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000.0000000000",
                 expectedFormattedNumber = "1.000,00",
-                expectedSuffix = ""
+                expectedSuffix = null
             )
         }
     }
@@ -67,7 +69,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "541122.0124123",
                 expectedFormattedNumber = "541.122,01",
-                expectedSuffix = ""
+                expectedSuffix = null
             )
         }
     }
@@ -78,7 +80,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "999999.999999999",
                 expectedFormattedNumber = "999.999,99",
-                expectedSuffix = ""
+                expectedSuffix = null
             )
         }
     }

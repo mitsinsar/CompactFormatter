@@ -51,10 +51,11 @@ abstract class BaseLocalizedFormatterTest {
     protected fun assertFormattedNumber(
         rawNumber: String,
         expectedFormattedNumber: String,
-        expectedSuffix: String
+        expectedSuffix: String?
     ): Boolean {
         val number = BigDecimal(rawNumber)
         val formattedCompactDecimal = formatter.format(number)
+        println(formattedCompactDecimal.toString())
         return with(formattedCompactDecimal) {
             this.number == number && formattedNumber == expectedFormattedNumber && suffix == expectedSuffix
         }

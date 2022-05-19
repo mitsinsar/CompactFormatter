@@ -1,18 +1,17 @@
 package com.mitsinsar.peracompactdecimalformat
 
-import com.mitsinsar.peracompactdecimalformat.locals.base.BaseLocale
 import com.mitsinsar.peracompactdecimalformat.locals.EnglishLocale
-import com.mitsinsar.peracompactdecimalformat.locals.base.NumberLocaleIndexProvider
-import com.mitsinsar.peracompactdecimalformat.locals.base.PeraLocaleIndexProvider
+import com.mitsinsar.peracompactdecimalformat.locals.base.BaseLocale
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberFormatter
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 
 class PeraCompactDecimalFormatBuilder {
 
-    private lateinit var numberLocaleIndexProvider: NumberLocaleIndexProvider
     private lateinit var locale: BaseLocale
     private lateinit var numberFormatter: NumberFormatter
     private var style: CompactStyle = CompactStyle.SHORT
+    private var excludeShorteningNumbersSet = mutableSetOf<NumberConstants>()
 
     fun setLocale(newLocale: BaseLocale): PeraCompactDecimalFormatBuilder {
         locale = newLocale
@@ -29,8 +28,8 @@ class PeraCompactDecimalFormatBuilder {
         return this
     }
 
-    fun setNumberLocaleIndexProvider(newIndexProvider: NumberLocaleIndexProvider): PeraCompactDecimalFormatBuilder {
-        this.numberLocaleIndexProvider = newIndexProvider
+    fun excludeShorteningNumber(vararg numberConstants: NumberConstants): PeraCompactDecimalFormatBuilder {
+        excludeShorteningNumbersSet.addAll(numberConstants)
         return this
     }
 
@@ -39,26 +38,19 @@ class PeraCompactDecimalFormatBuilder {
         return PeraCompactDecimalFormat(
             locale = locale,
             style = style,
-            indexProvider = numberLocaleIndexProvider,
-            numberFormatter = numberFormatter
+            numberFormatter = numberFormatter,
+            excludedShorteningNumbersSet = excludeShorteningNumbersSet
         )
     }
 
     private fun setGlobalsIfNotInitialized() {
-        setDefaultNumberLocaleIndexProviderIfNull()
         setDefaultLocaleIfNull()
         setDefaultNumberFormatterIfNull()
     }
 
     private fun setDefaultNumberFormatterIfNull() {
         if (!::numberFormatter.isInitialized) {
-            numberFormatter = PeraNumberFormatter.getInstance(locale.javaLocaleClass)
-        }
-    }
-
-    private fun setDefaultNumberLocaleIndexProviderIfNull() {
-        if (!::numberLocaleIndexProvider.isInitialized) {
-            numberLocaleIndexProvider = PeraLocaleIndexProvider.getInstance()
+            numberFormatter = PeraNumberFormatter.getInstance(locale.localeConstant)
         }
     }
 

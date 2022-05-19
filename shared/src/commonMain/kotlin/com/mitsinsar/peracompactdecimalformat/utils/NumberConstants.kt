@@ -10,5 +10,9 @@ enum class NumberConstants(val value: BigDecimal) {
     TRILLION(BigDecimal("1000000000000")),
     QUADRILLION(BigDecimal("1000000000000000")),
     QUINTILLION(BigDecimal("1000000000000000000")),
-    MAX_UINT64(BigDecimal(ULong.MAX_VALUE.toString()))
+    MAX_UINT64(BigDecimal(ULong.MAX_VALUE.toString()));
+
+    companion object {
+        fun getByIndex(index: Int): NumberConstants = values()[index]
+    }
 }
