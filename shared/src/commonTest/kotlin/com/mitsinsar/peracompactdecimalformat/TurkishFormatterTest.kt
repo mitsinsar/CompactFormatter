@@ -1,249 +1,246 @@
 package com.mitsinsar.peracompactdecimalformat
 
-import com.mitsinsar.peracompactdecimalformat.locals.EnglishLocale
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import com.mitsinsar.peracompactdecimalformat.locals.TurkishLocale
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
+import kotlin.test.Test
 import kotlin.test.assertTrue
 
-@RunWith(JUnit4::class)
-class EnglishFormatterTest : BaseLocalizedFormatterTest() {
+class TurkishFormatterTest : BaseLocalizedFormatterTest() {
 
-    @Before
-    fun setup() {
+    init {
         formatter = PeraCompactDecimalFormatBuilder.getInstance()
-            .setLocale(EnglishLocale())
+            .setLocale(TurkishLocale())
+            .excludeShorteningNumber(NumberConstants.THOUSAND)
             .build()
     }
 
     @Test
-    override fun `check if minimum small number works`() {
+    override fun checkIfMinimumSmallNumberWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "0",
-                expectedFormattedNumber = "0.00",
-                expectedSuffix = ""
+                expectedFormattedNumber = "0,00",
+                expectedSuffix = null
             )
         }
     }
 
     @Test
-    override fun `check if random small number works`() {
+    override fun checkIfRandomSmallNumberWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "214.42521321324123",
-                expectedFormattedNumber = "214.42",
-                expectedSuffix = ""
+                expectedFormattedNumber = "214,42",
+                expectedSuffix = null
             )
         }
     }
 
     @Test
-    override fun `check if maximum small number works`() {
+    override fun checkIfMaximumSmallNumberWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999.999999999",
-                expectedFormattedNumber = "999.99",
-                expectedSuffix = ""
+                expectedFormattedNumber = "999,99",
+                expectedSuffix = null
             )
         }
     }
 
     @Test
-    override fun `check if minimum thousand works`() {
+    override fun checkIfMinimumThousandWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000.0000000000",
-                expectedFormattedNumber = "1,000.00",
-                expectedSuffix = ""
+                expectedFormattedNumber = "1.000,00",
+                expectedSuffix = null
             )
         }
     }
 
     @Test
-    override fun `check if random thousand works`() {
+    override fun checkIfRandomThousandWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "541122.0124123",
-                expectedFormattedNumber = "541,122.01",
-                expectedSuffix = ""
+                expectedFormattedNumber = "541.122,01",
+                expectedSuffix = null
             )
         }
     }
 
     @Test
-    override fun `check if maximum thousand works`() {
+    override fun checkIfMaximumThousandWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999.999999999",
-                expectedFormattedNumber = "999,999.99",
-                expectedSuffix = ""
+                expectedFormattedNumber = "999.999,99",
+                expectedSuffix = null
             )
         }
     }
 
     @Test
-    override fun `check if minimum million works`() {
+    override fun checkIfMinimumMillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000",
-                expectedFormattedNumber = "1.00",
+                expectedFormattedNumber = "1,00",
                 expectedSuffix = "M"
             )
         }
     }
 
     @Test
-    override fun `check if mid million works`() {
+    override fun checkIfRandomMillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "249520000",
-                expectedFormattedNumber = "249.52",
+                expectedFormattedNumber = "249,52",
                 expectedSuffix = "M"
             )
         }
     }
 
     @Test
-    override fun `check if max million works`() {
+    override fun checkIfMaximumMillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999.999",
-                expectedFormattedNumber = "999.99",
+                expectedFormattedNumber = "999,99",
                 expectedSuffix = "M"
             )
         }
     }
 
     @Test
-    override fun `check if minimum billion works`() {
+    override fun checkIfMinimumBillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000.999",
-                expectedFormattedNumber = "1.00",
-                expectedSuffix = "B"
+                expectedFormattedNumber = "1,00",
+                expectedSuffix = "Mr"
             )
         }
     }
 
     @Test
-    override fun `check if random billion works`() {
+    override fun checkIfRandomBillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "12489000000.999",
-                expectedFormattedNumber = "12.48",
-                expectedSuffix = "B"
+                expectedFormattedNumber = "12,48",
+                expectedSuffix = "Mr"
             )
         }
     }
 
     @Test
-    override fun `check if maximum billion works`() {
+    override fun checkIfMaximumBillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999999.9999999",
-                expectedFormattedNumber = "999.99",
-                expectedSuffix = "B"
+                expectedFormattedNumber = "999,99",
+                expectedSuffix = "Mr"
             )
         }
     }
 
     @Test
-    override fun `check if minimum trillion works`() {
+    override fun checkIfMinimumTrillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000",
-                expectedFormattedNumber = "1.00",
-                expectedSuffix = "t"
+                expectedFormattedNumber = "1,00",
+                expectedSuffix = "T"
             )
         }
     }
 
     @Test
-    override fun `check if random trillion works`() {
+    override fun checkIfRandomTrillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "211782475000000.516316214",
-                expectedFormattedNumber = "211.78",
-                expectedSuffix = "t"
+                expectedFormattedNumber = "211,78",
+                expectedSuffix = "T"
             )
         }
     }
 
     @Test
-    override fun `check if maximum trillion works`() {
+    override fun checkIfMaximumTrillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999999999.99999999",
-                expectedFormattedNumber = "999.99",
-                expectedSuffix = "t"
+                expectedFormattedNumber = "999,99",
+                expectedSuffix = "T"
             )
         }
     }
 
     @Test
-    override fun `check if minimum quadrillion works`() {
+    override fun checkIfMinimumQuadrillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000000",
-                expectedFormattedNumber = "1.00",
-                expectedSuffix = "q"
+                expectedFormattedNumber = "1,00",
+                expectedSuffix = "Kt"
             )
         }
     }
 
     @Test
-    override fun `check if random quadrillion works`() {
+    override fun checkIfRandomQuadrillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "261897000000000000.42187821",
-                expectedFormattedNumber = "261.89",
-                expectedSuffix = "q"
+                expectedFormattedNumber = "261,89",
+                expectedSuffix = "Kt"
             )
         }
     }
 
     @Test
-    override fun `check if maximum quadrillion works`() {
+    override fun checkIfMaximumQuadrillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999999999999.9999999999",
-                expectedFormattedNumber = "999.99",
-                expectedSuffix = "q"
+                expectedFormattedNumber = "999,99",
+                expectedSuffix = "Kt"
             )
         }
     }
 
     @Test
-    override fun `check if minimum quintillion works`() {
+    override fun checkIfMinimumQuintillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000000000",
-                expectedFormattedNumber = "1.00",
-                expectedSuffix = "Q"
+                expectedFormattedNumber = "1,00",
+                expectedSuffix = "Kn"
             )
         }
     }
 
     @Test
-    override fun `check if random quintillion works`() {
+    override fun checkIfRandomQuintillionWorks() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "5878674635918825120.4215213",
-                expectedFormattedNumber = "5.87",
-                expectedSuffix = "Q"
+                expectedFormattedNumber = "5,87",
+                expectedSuffix = "Kn"
             )
         }
     }
 
     @Test
-    override fun `check if max UINT64 works`() {
+    override fun checkIfMaxUINT64Works() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "18446744073709551615",
-                expectedFormattedNumber = "18.44",
-                expectedSuffix = "Q"
+                expectedFormattedNumber = "18,44",
+                expectedSuffix = "Kn"
             )
         }
     }

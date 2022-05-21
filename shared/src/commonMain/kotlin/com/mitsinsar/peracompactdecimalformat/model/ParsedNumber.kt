@@ -1,9 +1,9 @@
 package com.mitsinsar.peracompactdecimalformat.model
 
-import java.math.BigDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 
 data class ParsedNumber(
-    val rawNumber: BigDecimal,
-    val parsedNumber: BigDecimal,
+    val rawNumber: PeraDecimal,
+    val parsedNumber: PeraDecimal,
     val shiftCount: Int
 )

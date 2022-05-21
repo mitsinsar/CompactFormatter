@@ -1,7 +1,6 @@
 package com.mitsinsar.peracompactdecimalformat.locals.base
 
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
-import com.mitsinsar.peracompactdecimalformat.utils.PeraLogger
 
 abstract class BaseLocale {
 
@@ -28,16 +27,6 @@ abstract class BaseLocale {
     }
 
     private fun getLocalSuffix(numberConstants: NumberConstants): LocalizedSuffix? {
-        return suffixList[numberConstants].also { localizedSuffix ->
-            if (localizedSuffix == null) logNotImplementedLocalizedSuffix(numberConstants)
-        }
-    }
-
-    private fun logNotImplementedLocalizedSuffix(numberConstants: NumberConstants) {
-        PeraLogger.log(logTag, "Localized suffix is not implemented for $numberConstants")
-    }
-
-    companion object {
-        private val logTag = BaseLocale::class.simpleName.orEmpty()
+        return suffixList[numberConstants]
     }
 }

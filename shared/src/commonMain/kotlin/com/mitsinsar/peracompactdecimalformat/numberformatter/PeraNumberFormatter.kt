@@ -1,12 +1,16 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
-import java.math.BigDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
 
-expect class PeraNumberFormatter : NumberFormatter {
+internal expect class PeraNumberFormatter internal constructor(
+    localeConstant: String,
+    peraRoundingMode: PeraRoundingMode,
+    minimumFractionalDigit: Int,
+    maximumFractionalDigit: Int,
+    useGrouping: Boolean,
+    groupingSize: Int
+) : NumberFormatter {
 
-    override fun format(number: BigDecimal): String
-
-    companion object {
-        fun getInstance(localeConstant: String): NumberFormatter
-    }
+    override fun format(number: PeraDecimal): String
 }

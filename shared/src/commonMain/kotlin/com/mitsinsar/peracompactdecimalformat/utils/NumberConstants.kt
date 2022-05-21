@@ -1,16 +1,14 @@
 package com.mitsinsar.peracompactdecimalformat.utils
 
-import java.math.BigDecimal
-
-enum class NumberConstants(val value: BigDecimal) {
-    ZERO(BigDecimal.ZERO),
-    THOUSAND(BigDecimal("1000")),
-    MILLION(BigDecimal("1000000")),
-    BILLION(BigDecimal("1000000000")),
-    TRILLION(BigDecimal("1000000000000")),
-    QUADRILLION(BigDecimal("1000000000000000")),
-    QUINTILLION(BigDecimal("1000000000000000000")),
-    MAX_UINT64(BigDecimal(ULong.MAX_VALUE.toString()));
+enum class NumberConstants(val value: PeraDecimal) {
+    ZERO(PeraDecimal("0")),
+    THOUSAND(PeraDecimal("1000")),
+    MILLION(PeraDecimal("1000000")),
+    BILLION(PeraDecimal("1000000000")),
+    TRILLION(PeraDecimal("1000000000000")),
+    QUADRILLION(PeraDecimal("1000000000000000")),
+    QUINTILLION(PeraDecimal("1000000000000000000")),
+    MAX_UINT64(PeraDecimal(ULong.MAX_VALUE.toString()));
 
     companion object {
         fun getByIndex(index: Int): NumberConstants = values()[index]

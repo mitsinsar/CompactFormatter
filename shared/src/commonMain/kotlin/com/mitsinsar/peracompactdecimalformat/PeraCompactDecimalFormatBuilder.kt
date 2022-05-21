@@ -3,7 +3,7 @@ package com.mitsinsar.peracompactdecimalformat
 import com.mitsinsar.peracompactdecimalformat.locals.EnglishLocale
 import com.mitsinsar.peracompactdecimalformat.locals.base.BaseLocale
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
-import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberFormatter
+import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatterBuilder
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 
 class PeraCompactDecimalFormatBuilder {
@@ -50,7 +50,7 @@ class PeraCompactDecimalFormatBuilder {
 
     private fun setDefaultNumberFormatterIfNull() {
         if (!::numberFormatter.isInitialized) {
-            numberFormatter = PeraNumberFormatter.getInstance(locale.localeConstant)
+            numberFormatter = NumberFormatterBuilder.getInstance(locale.localeConstant).build()
         }
     }
 

@@ -1,19 +1,16 @@
 package com.mitsinsar.peracompactdecimalformat
 
 import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberParser.parseNumber
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
-import java.math.BigDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
+import kotlin.test.Test
 import kotlin.test.assertTrue
 
-@RunWith(JUnit4::class)
 class PeraNumberParserTest {
 
     @Test
-    fun `check if minimum works`() {
+    fun checkIfMinimumWorks() {
         // Given
-        val minimumNumber = BigDecimal.ZERO
+        val minimumNumber = PeraDecimal("0")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -21,7 +18,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("0") &&
+                this.parsedNumber == PeraDecimal("0") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 0
             }
@@ -29,9 +26,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if hundred works`() {
+    fun checkIfHundredWorks() {
         // Given
-        val minimumNumber = BigDecimal("512.25213125")
+        val minimumNumber = PeraDecimal("512.25213125")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -39,7 +36,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("512.25213125") &&
+                this.parsedNumber == PeraDecimal("512.25213125") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 0
             }
@@ -47,9 +44,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if thousand works`() {
+    fun checkIfThousandWorks() {
         // Given
-        val minimumNumber = BigDecimal("124125.25213125")
+        val minimumNumber = PeraDecimal("124125.25213125")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -57,7 +54,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("124.12525213125") &&
+                this.parsedNumber == PeraDecimal("124.12525213125") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 1
             }
@@ -65,9 +62,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if million works`() {
+    fun checkIfMillionWorks() {
         // Given
-        val minimumNumber = BigDecimal("5124125.25213125")
+        val minimumNumber = PeraDecimal("5124125.25213125")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -76,7 +73,7 @@ class PeraNumberParserTest {
 
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("5.12412525213125") &&
+                this.parsedNumber == PeraDecimal("5.12412525213125") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 2
             }
@@ -84,9 +81,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if billion works`() {
+    fun checkIfBillionWorks() {
         // Given
-        val minimumNumber = BigDecimal("124125252241.24123")
+        val minimumNumber = PeraDecimal("124125252241.24123")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -94,7 +91,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("124.12525224124123") &&
+                this.parsedNumber == PeraDecimal("124.12525224124123") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 3
             }
@@ -102,9 +99,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if trillion works`() {
+    fun checkIfTrillionWorks() {
         // Given
-        val minimumNumber = BigDecimal("1234567891234.567890")
+        val minimumNumber = PeraDecimal("1234567891234.56789")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -112,7 +109,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("1.234567891234567890") &&
+                this.parsedNumber == PeraDecimal("1.23456789123456789") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 4
             }
@@ -120,9 +117,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if quadrillion works`() {
+    fun checkIfQuadrillionWorks() {
         // Given
-        val minimumNumber = BigDecimal("1234567891234567.890")
+        val minimumNumber = PeraDecimal("1234567891234567.89")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -130,7 +127,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("1.234567891234567890") &&
+                this.parsedNumber == PeraDecimal("1.23456789123456789") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 5
             }
@@ -138,9 +135,9 @@ class PeraNumberParserTest {
     }
 
     @Test
-    fun `check if quintillion works`() {
+    fun checkIfQuintillionWorks() {
         // Given
-        val minimumNumber = BigDecimal("1234567891234567890")
+        val minimumNumber = PeraDecimal("1234567891234567890")
 
         // When
         val parsedNumber = parseNumber(minimumNumber)
@@ -148,7 +145,7 @@ class PeraNumberParserTest {
         // Then
         assertTrue {
             with(parsedNumber) {
-                this.parsedNumber == BigDecimal("1.234567891234567890") &&
+                this.parsedNumber == PeraDecimal("1.23456789123456789") &&
                     rawNumber == minimumNumber &&
                     shiftCount == 6
             }

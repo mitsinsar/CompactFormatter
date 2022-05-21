@@ -6,7 +6,7 @@ import com.mitsinsar.peracompactdecimalformat.model.ParsedNumber
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberParser.parseNumber
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
-import java.math.BigDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 
 class PeraCompactDecimalFormat internal constructor(
     private val locale: BaseLocale,
@@ -15,7 +15,7 @@ class PeraCompactDecimalFormat internal constructor(
     private val excludedShorteningNumbersSet: Set<NumberConstants>
 ) {
 
-    fun format(number: BigDecimal): CompactDecimal {
+    fun format(number: PeraDecimal): CompactDecimal {
         val parsedNumber = parseNumber(number)
         val formattedNumber = getFormattedNumber(parsedNumber)
         val localizedSuffix = getLocalizedSuffix(NumberConstants.getByIndex(parsedNumber.shiftCount))
@@ -33,7 +33,7 @@ class PeraCompactDecimalFormat internal constructor(
     }
 
     private fun getFormattedNumber(parsedNumber: ParsedNumber): String {
-        val numberToFormat: BigDecimal = with(parsedNumber) {
+        val numberToFormat = with(parsedNumber) {
             val floorNumber = NumberConstants.getByIndex(parsedNumber.shiftCount)
             if (excludedShorteningNumbersSet.contains(floorNumber)) rawNumber else this.parsedNumber
         }

@@ -1,9 +1,9 @@
 package com.mitsinsar.peracompactdecimalformat.model
 
-import java.math.BigDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 
 data class CompactDecimal(
-    val number: BigDecimal,
+    val number: PeraDecimal,
     val formattedNumber: String,
     val suffix: String?
 ) {
