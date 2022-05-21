@@ -1,25 +1,38 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
-import java.math.BigDecimal
-import java.math.RoundingMode
+import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter.Constants.FORMAT_PATTERN
+import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
 
-class PeraNumberFormatter private constructor(private val locale: Locale) : NumberFormatter {
+internal actual class PeraNumberFormatter actual constructor(
+    override val localeConstant: String,
+    override val peraRoundingMode: PeraRoundingMode,
+    override val minimumFractionalDigit: Int,
+    override val maximumFractionalDigit: Int,
+    override val useGrouping: Boolean,
+    override val groupingSize: Int
+) : NumberFormatter {
 
-    // TODO Create custom exception
-    override fun format(number: BigDecimal): String {
-        return DecimalFormat(FORMAT_PATTERN, DecimalFormatSymbols(locale)).apply {
-            roundingMode = RoundingMode.DOWN
-        }.format(number)
+    private val locale = Locale(localeConstant)
+    private val decimalFormatSymbols = DecimalFormatSymbols(locale)
+
+    actual override fun format(number: PeraDecimal): String {
+        return getFormatter().format(number.toBigDecimal())
     }
 
-    companion object {
-
-        private const val FORMAT_PATTERN = "#,##0.00"
-        private val DEFAULT_LOCALE = Locale.ENGLISH
-
-        fun getInstance(locale: Locale = DEFAULT_LOCALE) = PeraNumberFormatter(locale)
+    private fun getFormatter(): DecimalFormat {
+        return DecimalFormat(FORMAT_PATTERN, DecimalFormatSymbols(locale)).apply {
+            maximumFractionDigits = maximumFractionalDigit
+            minimumFractionDigits = minimumFractionalDigit
+            roundingMode = peraRoundingMode.roundingMode
+            if (useGrouping) {
+                decimalFormatSymbols = this@PeraNumberFormatter.decimalFormatSymbols
+                groupingSize = this@PeraNumberFormatter.groupingSize
+                isGroupingUsed = true
+            }
+        }
     }
 }
