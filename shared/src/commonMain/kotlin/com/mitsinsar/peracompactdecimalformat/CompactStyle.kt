@@ -1,7 +1,13 @@
 package com.mitsinsar.peracompactdecimalformat
 
-// TODO Write doc
 enum class CompactStyle {
+    /**
+     * Longer version, like "1.2 trillion"
+     */
     LONG,
+
+    /**
+     * Short version, like "1.2T"
+     */
     SHORT
 }
