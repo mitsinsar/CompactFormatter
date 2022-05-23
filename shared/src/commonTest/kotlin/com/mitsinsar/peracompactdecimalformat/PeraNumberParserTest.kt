@@ -133,22 +133,4 @@ class PeraNumberParserTest {
             }
         }
     }
-
-    @Test
-    fun checkIfQuintillionWorks() {
-        // Given
-        val minimumNumber = PeraDecimal("1234567891234567890")
-
-        // When
-        val parsedNumber = parseNumber(minimumNumber)
-
-        // Then
-        assertTrue {
-            with(parsedNumber) {
-                this.parsedNumber == PeraDecimal("1.23456789123456789") &&
-                    rawNumber == minimumNumber &&
-                    shiftCount == 6
-            }
-        }
-    }
 }

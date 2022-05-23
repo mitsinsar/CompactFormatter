@@ -8,8 +8,7 @@ import kotlin.test.assertTrue
 class TurkishFormatterTest : BaseLocalizedFormatterTest() {
 
     init {
-        formatter = PeraCompactDecimalFormatBuilder.getInstance()
-            .setLocale(TurkishLocale())
+        formatter = PeraCompactDecimalFormatBuilder.getInstance(TurkishLocale)
             .excludeShorteningNumber(NumberConstants.THOUSAND)
             .build()
     }

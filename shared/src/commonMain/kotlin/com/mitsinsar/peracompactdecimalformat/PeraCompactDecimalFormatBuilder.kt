@@ -6,12 +6,12 @@ import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatterBuilder
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 
-class PeraCompactDecimalFormatBuilder {
+class PeraCompactDecimalFormatBuilder(initialLocale: BaseLocale) {
 
-    private lateinit var locale: BaseLocale
-    private lateinit var numberFormatter: NumberFormatter
+    private var locale: BaseLocale = initialLocale
     private var style: CompactStyle = CompactStyle.SHORT
     private var excludeShorteningNumbersSet = mutableSetOf<NumberConstants>()
+    private lateinit var numberFormatter: NumberFormatter
 
     fun setLocale(newLocale: BaseLocale): PeraCompactDecimalFormatBuilder {
         locale = newLocale
@@ -34,7 +34,7 @@ class PeraCompactDecimalFormatBuilder {
     }
 
     fun build(): PeraCompactDecimalFormat {
-        setGlobalsIfNotInitialized()
+        setDefaultNumberFormatterIfNull()
         return PeraCompactDecimalFormat(
             locale = locale,
             style = style,
@@ -43,26 +43,15 @@ class PeraCompactDecimalFormatBuilder {
         )
     }
 
-    private fun setGlobalsIfNotInitialized() {
-        setDefaultLocaleIfNull()
-        setDefaultNumberFormatterIfNull()
-    }
-
     private fun setDefaultNumberFormatterIfNull() {
         if (!::numberFormatter.isInitialized) {
             numberFormatter = NumberFormatterBuilder.getInstance(locale.localeConstant).build()
         }
     }
 
-    private fun setDefaultLocaleIfNull() {
-        if (!::locale.isInitialized) {
-            locale = DEFAULT_LOCALE
-        }
-    }
-
     companion object {
-        private val DEFAULT_LOCALE: BaseLocale by lazy { EnglishLocale() }
+        private val DEFAULT_LOCALE: BaseLocale by lazy { EnglishLocale }
 
-        fun getInstance() = PeraCompactDecimalFormatBuilder()
+        fun getInstance(locale: BaseLocale = DEFAULT_LOCALE) = PeraCompactDecimalFormatBuilder(locale)
     }
 }

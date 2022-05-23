@@ -1,6 +1,5 @@
 package com.mitsinsar.peracompactdecimalformat
 
-import com.mitsinsar.peracompactdecimalformat.locals.EnglishLocale
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -10,7 +9,6 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
     init {
         formatter = PeraCompactDecimalFormatBuilder.getInstance()
             .excludeShorteningNumber(NumberConstants.THOUSAND)
-            .setLocale(EnglishLocale())
             .build()
     }
 

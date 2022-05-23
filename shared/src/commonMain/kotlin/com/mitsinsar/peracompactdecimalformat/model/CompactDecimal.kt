@@ -9,5 +9,5 @@ data class CompactDecimal(
 ) {
 
     val formattedNumberWithSuffix: String
-        get() = "$formattedNumber$suffix"
+        get() = "$formattedNumber${suffix.orEmpty()}"
 }

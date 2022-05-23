@@ -10,7 +10,7 @@ import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUINTILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.THOUSAND
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.TRILLION
 
-class EnglishLocale : BaseLocale() {
+object EnglishLocale : BaseLocale() {
 
     override val localeConstant: String
         get() = ENGLISH.localeConstant
