@@ -1,6 +1,5 @@
 package com.mitsinsar.peracompactdecimalformat
 
-import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -8,8 +7,84 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
 
     init {
         formatter = PeraCompactDecimalFormatBuilder.getInstance()
-            .excludeShorteningNumber(NumberConstants.THOUSAND)
             .build()
+    }
+
+    @Test
+    fun checkIfLessThanOneWithDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "0.48364521521",
+                expectedFormattedNumber = "0.483645",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanOneWithoutDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "0.0000000",
+                expectedFormattedNumber = "0.00",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.2833",
+                expectedFormattedNumber = "5.2833",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithoutDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.0000000",
+                expectedFormattedNumber = "5.00",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenThousandWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "2242.02512",
+                expectedFormattedNumber = "2,242.02",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfMoreThanTenThousandWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "10439.1544",
+                expectedFormattedNumber = "10,439",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanMillionWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "559012.12512321",
+                expectedFormattedNumber = "559,012",
+                expectedSuffix = null
+            )
+        }
     }
 
     @Test
@@ -61,7 +136,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "541122.0124123",
-                expectedFormattedNumber = "541,122.01",
+                expectedFormattedNumber = "541,122",
                 expectedSuffix = null
             )
         }
@@ -72,7 +147,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999.999999999",
-                expectedFormattedNumber = "999,999.99",
+                expectedFormattedNumber = "999,999",
                 expectedSuffix = null
             )
         }

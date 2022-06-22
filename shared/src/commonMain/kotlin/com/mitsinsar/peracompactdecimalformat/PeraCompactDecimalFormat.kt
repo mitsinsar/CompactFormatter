@@ -5,14 +5,14 @@ import com.mitsinsar.peracompactdecimalformat.model.CompactDecimal
 import com.mitsinsar.peracompactdecimalformat.model.ParsedNumber
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberParser.parseNumber
+import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 
 class PeraCompactDecimalFormat internal constructor(
     private val locale: BaseLocale,
     private val style: CompactStyle,
-    private val numberFormatter: NumberFormatter,
-    private val excludedShorteningNumbersSet: Set<NumberConstants>
+    private val numberFormatter: NumberFormatter
 ) {
 
     fun format(number: PeraDecimal): CompactDecimal {
@@ -23,7 +23,6 @@ class PeraCompactDecimalFormat internal constructor(
     }
 
     private fun getLocalizedSuffix(numberConstants: NumberConstants): String? {
-        if (excludedShorteningNumbersSet.contains(numberConstants)) return null
         return with(locale) {
             when (style) {
                 CompactStyle.SHORT -> getShortSuffix(numberConstants)
@@ -33,10 +32,10 @@ class PeraCompactDecimalFormat internal constructor(
     }
 
     private fun getFormattedNumber(parsedNumber: ParsedNumber): String {
-        val numberToFormat = with(parsedNumber) {
-            val floorNumber = NumberConstants.getByIndex(parsedNumber.shiftCount)
-            if (excludedShorteningNumbersSet.contains(floorNumber)) rawNumber else this.parsedNumber
+        return with(parsedNumber) {
+            val fractionalDigit = FractionalDigit.create(rawNumber)
+            val numberToFormat = if (rawNumber < NumberConstants.MILLION.value) rawNumber else this.parsedNumber
+            numberFormatter.format(numberToFormat, fractionalDigit)
         }
-        return numberFormatter.format(numberToFormat)
     }
 }
