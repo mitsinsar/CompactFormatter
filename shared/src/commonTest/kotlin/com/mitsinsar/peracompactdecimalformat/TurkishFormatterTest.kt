@@ -1,7 +1,6 @@
 package com.mitsinsar.peracompactdecimalformat
 
 import com.mitsinsar.peracompactdecimalformat.locals.TurkishLocale
-import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -9,7 +8,6 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
 
     init {
         formatter = PeraCompactDecimalFormatBuilder.getInstance(TurkishLocale)
-            .excludeShorteningNumber(NumberConstants.THOUSAND)
             .build()
     }
 

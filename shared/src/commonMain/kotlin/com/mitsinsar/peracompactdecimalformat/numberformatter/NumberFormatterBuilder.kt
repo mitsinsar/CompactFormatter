@@ -5,8 +5,6 @@ import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
 class NumberFormatterBuilder(private val localeConstant: String) {
 
     private var roundingMode: PeraRoundingMode = DEFAULT_ROUNDING_MODE
-    private var minimumFractionalDigit: Int = DEFAULT_MINIMUM_FRACTION_DIGIT
-    private var maximumFractionalDigit: Int = DEFAULT_MAXIMUM_FRACTION_DIGIT
     private var useGrouping: Boolean = DEFAULT_GROUPING_PREFERENCE
     private var groupingSize: Int = DEFAULT_GROUPING_SIZE
 
@@ -15,15 +13,6 @@ class NumberFormatterBuilder(private val localeConstant: String) {
         return this
     }
 
-    fun setMinimumFractionalDigit(digitCount: Int): NumberFormatterBuilder {
-        minimumFractionalDigit = digitCount
-        return this
-    }
-
-    fun setMaximumFractionalDigit(digitCount: Int): NumberFormatterBuilder {
-        maximumFractionalDigit = digitCount
-        return this
-    }
 
     fun useGrouping(useGrouping: Boolean): NumberFormatterBuilder {
         this.useGrouping = useGrouping
@@ -39,8 +28,6 @@ class NumberFormatterBuilder(private val localeConstant: String) {
         return PeraNumberFormatter(
             localeConstant,
             roundingMode,
-            minimumFractionalDigit,
-            maximumFractionalDigit,
             useGrouping,
             groupingSize
         )
@@ -48,8 +35,6 @@ class NumberFormatterBuilder(private val localeConstant: String) {
 
     companion object {
         private val DEFAULT_ROUNDING_MODE = PeraRoundingMode.DOWN
-        private const val DEFAULT_MINIMUM_FRACTION_DIGIT = 2
-        private const val DEFAULT_MAXIMUM_FRACTION_DIGIT = 2
         private const val DEFAULT_GROUPING_PREFERENCE = true
         private const val DEFAULT_GROUPING_SIZE = 3
 
