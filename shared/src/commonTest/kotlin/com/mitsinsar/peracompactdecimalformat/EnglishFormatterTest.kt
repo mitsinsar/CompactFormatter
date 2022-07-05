@@ -225,7 +225,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000",
                 expectedFormattedNumber = "1.00",
-                expectedSuffix = "t"
+                expectedSuffix = "T"
             )
         }
     }
@@ -236,7 +236,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "211782475000000.516316214",
                 expectedFormattedNumber = "211.78",
-                expectedSuffix = "t"
+                expectedSuffix = "T"
             )
         }
     }
@@ -247,7 +247,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "999999999999999.99999999",
                 expectedFormattedNumber = "999.99",
-                expectedSuffix = "t"
+                expectedSuffix = "T"
             )
         }
     }
