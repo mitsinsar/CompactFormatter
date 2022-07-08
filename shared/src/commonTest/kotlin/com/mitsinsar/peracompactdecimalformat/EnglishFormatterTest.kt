@@ -258,7 +258,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000000",
                 expectedFormattedNumber = "1.00",
-                expectedSuffix = "q"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -269,7 +269,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "261897000000000000.42187821",
                 expectedFormattedNumber = "261.89",
-                expectedSuffix = "q"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -280,7 +280,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "999999999999999999.9999999999",
                 expectedFormattedNumber = "999.99",
-                expectedSuffix = "q"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -291,7 +291,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000000000",
                 expectedFormattedNumber = "1.00",
-                expectedSuffix = "Q"
+                expectedSuffix = "Qi"
             )
         }
     }
@@ -302,7 +302,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "5878674635918825120.4215213",
                 expectedFormattedNumber = "5.87",
-                expectedSuffix = "Q"
+                expectedSuffix = "Qi"
             )
         }
     }
@@ -313,7 +313,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "18446744073709551615",
                 expectedFormattedNumber = "18.44",
-                expectedSuffix = "Q"
+                expectedSuffix = "Qi"
             )
         }
     }

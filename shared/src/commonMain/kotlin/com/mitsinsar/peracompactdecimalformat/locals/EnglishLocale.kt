@@ -19,7 +19,7 @@ object EnglishLocale : BaseLocale() {
         addSuffix(MILLION, LocalizedSuffix("M", "Million"))
         addSuffix(BILLION, LocalizedSuffix("B", "Billion"))
         addSuffix(TRILLION, LocalizedSuffix("T", "Trillion"))
-        addSuffix(QUADRILLION, LocalizedSuffix("q", "Quadrillion"))
-        addSuffix(QUINTILLION, LocalizedSuffix("Q", "Quintillion"))
+        addSuffix(QUADRILLION, LocalizedSuffix("Qa", "Quadrillion"))
+        addSuffix(QUINTILLION, LocalizedSuffix("Qi", "Quintillion"))
     }
 }
