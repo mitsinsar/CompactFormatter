@@ -1,6 +1,5 @@
 package com.mitsinsar.peracompactdecimalformat
 
-import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
@@ -8,8 +7,84 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
 
     init {
         formatter = PeraCompactDecimalFormatBuilder.getInstance()
-            .excludeShorteningNumber(NumberConstants.THOUSAND)
             .build()
+    }
+
+    @Test
+    fun checkIfLessThanOneWithDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "0.48364521521",
+                expectedFormattedNumber = "0.483645",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanOneWithoutDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "0.0000000",
+                expectedFormattedNumber = "0.00",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.2833",
+                expectedFormattedNumber = "5.2833",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithoutDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.0000000",
+                expectedFormattedNumber = "5.00",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenThousandWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "2242.02512",
+                expectedFormattedNumber = "2,242.02",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfMoreThanTenThousandWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "10439.1544",
+                expectedFormattedNumber = "10,439",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanMillionWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "559012.12512321",
+                expectedFormattedNumber = "559,012",
+                expectedSuffix = null
+            )
+        }
     }
 
     @Test
@@ -61,7 +136,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "541122.0124123",
-                expectedFormattedNumber = "541,122.01",
+                expectedFormattedNumber = "541,122",
                 expectedSuffix = null
             )
         }
@@ -72,7 +147,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999.999999999",
-                expectedFormattedNumber = "999,999.99",
+                expectedFormattedNumber = "999,999",
                 expectedSuffix = null
             )
         }
@@ -150,7 +225,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000",
                 expectedFormattedNumber = "1.00",
-                expectedSuffix = "t"
+                expectedSuffix = "T"
             )
         }
     }
@@ -161,7 +236,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "211782475000000.516316214",
                 expectedFormattedNumber = "211.78",
-                expectedSuffix = "t"
+                expectedSuffix = "T"
             )
         }
     }
@@ -172,7 +247,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "999999999999999.99999999",
                 expectedFormattedNumber = "999.99",
-                expectedSuffix = "t"
+                expectedSuffix = "T"
             )
         }
     }
@@ -183,7 +258,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000000",
                 expectedFormattedNumber = "1.00",
-                expectedSuffix = "q"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -194,7 +269,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "261897000000000000.42187821",
                 expectedFormattedNumber = "261.89",
-                expectedSuffix = "q"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -205,7 +280,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "999999999999999999.9999999999",
                 expectedFormattedNumber = "999.99",
-                expectedSuffix = "q"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -216,7 +291,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000000000",
                 expectedFormattedNumber = "1.00",
-                expectedSuffix = "Q"
+                expectedSuffix = "Qi"
             )
         }
     }
@@ -227,7 +302,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "5878674635918825120.4215213",
                 expectedFormattedNumber = "5.87",
-                expectedSuffix = "Q"
+                expectedSuffix = "Qi"
             )
         }
     }
@@ -238,7 +313,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "18446744073709551615",
                 expectedFormattedNumber = "18.44",
-                expectedSuffix = "Q"
+                expectedSuffix = "Qi"
             )
         }
     }

@@ -1,6 +1,7 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter.Constants.FORMAT_PATTERN
+import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
 import java.text.DecimalFormat
@@ -10,8 +11,6 @@ import java.util.Locale
 internal actual class PeraNumberFormatter actual constructor(
     override val localeConstant: String,
     override val peraRoundingMode: PeraRoundingMode,
-    override val minimumFractionalDigit: Int,
-    override val maximumFractionalDigit: Int,
     override val useGrouping: Boolean,
     override val groupingSize: Int
 ) : NumberFormatter {
@@ -19,14 +18,14 @@ internal actual class PeraNumberFormatter actual constructor(
     private val locale = Locale(localeConstant)
     private val decimalFormatSymbols = DecimalFormatSymbols(locale)
 
-    actual override fun format(number: PeraDecimal): String {
-        return getFormatter().format(number.toBigDecimal())
+    actual override fun format(number: PeraDecimal, fractionalDigit: FractionalDigit): String {
+        return getFormatter(fractionalDigit).format(number.toBigDecimal())
     }
 
-    private fun getFormatter(): DecimalFormat {
+    private fun getFormatter(fractionalDigit: FractionalDigit): DecimalFormat {
         return DecimalFormat(FORMAT_PATTERN, DecimalFormatSymbols(locale)).apply {
-            maximumFractionDigits = maximumFractionalDigit
-            minimumFractionDigits = minimumFractionalDigit
+            maximumFractionDigits = fractionalDigit.maxDigit
+            minimumFractionDigits = fractionalDigit.minDigit
             roundingMode = peraRoundingMode.roundingMode
             if (useGrouping) {
                 decimalFormatSymbols = this@PeraNumberFormatter.decimalFormatSymbols

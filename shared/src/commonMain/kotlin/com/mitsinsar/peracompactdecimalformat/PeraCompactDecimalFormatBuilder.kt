@@ -4,13 +4,11 @@ import com.mitsinsar.peracompactdecimalformat.locals.EnglishLocale
 import com.mitsinsar.peracompactdecimalformat.locals.base.BaseLocale
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatterBuilder
-import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 
 class PeraCompactDecimalFormatBuilder(initialLocale: BaseLocale) {
 
     private var locale: BaseLocale = initialLocale
     private var style: CompactStyle = CompactStyle.SHORT
-    private var excludeShorteningNumbersSet = mutableSetOf<NumberConstants>()
     private lateinit var numberFormatter: NumberFormatter
 
     fun setLocale(newLocale: BaseLocale): PeraCompactDecimalFormatBuilder {
@@ -28,18 +26,12 @@ class PeraCompactDecimalFormatBuilder(initialLocale: BaseLocale) {
         return this
     }
 
-    fun excludeShorteningNumber(vararg numberConstants: NumberConstants): PeraCompactDecimalFormatBuilder {
-        excludeShorteningNumbersSet.addAll(numberConstants)
-        return this
-    }
-
     fun build(): PeraCompactDecimalFormat {
         setDefaultNumberFormatterIfNull()
         return PeraCompactDecimalFormat(
             locale = locale,
             style = style,
-            numberFormatter = numberFormatter,
-            excludedShorteningNumbersSet = excludeShorteningNumbersSet
+            numberFormatter = numberFormatter
         )
     }
 
