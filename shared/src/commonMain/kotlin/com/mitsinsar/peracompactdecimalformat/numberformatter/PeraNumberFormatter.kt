@@ -1,6 +1,6 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
-import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
 

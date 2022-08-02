@@ -3,7 +3,7 @@ package com.mitsinsar.peracompactdecimalformat
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class EnglishFormatterTest : BaseLocalizedFormatterTest() {
+class AssetEnglishFormatterTest : BaseLocalizedFormatterTest() {
 
     init {
         formatter = PeraCompactDecimalFormatBuilder.getInstance()
@@ -69,8 +69,8 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
     fun checkIfMoreThanTenThousandWorks() {
         assertTrue {
             assertFormattedNumber(
-                rawNumber = "10439.1544",
-                expectedFormattedNumber = "10,439",
+                rawNumber = "10439.0000",
+                expectedFormattedNumber = "10,439.00",
                 expectedSuffix = null
             )
         }
@@ -81,7 +81,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "559012.12512321",
-                expectedFormattedNumber = "559,012",
+                expectedFormattedNumber = "559,012.12",
                 expectedSuffix = null
             )
         }
@@ -136,7 +136,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "541122.0124123",
-                expectedFormattedNumber = "541,122",
+                expectedFormattedNumber = "541,122.01",
                 expectedSuffix = null
             )
         }
@@ -147,7 +147,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999.999999999",
-                expectedFormattedNumber = "999,999",
+                expectedFormattedNumber = "999,999.99",
                 expectedSuffix = null
             )
         }
@@ -158,7 +158,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000",
-                expectedFormattedNumber = "1.00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "M"
             )
         }
@@ -191,7 +191,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000.999",
-                expectedFormattedNumber = "1.00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "B"
             )
         }
@@ -224,7 +224,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000",
-                expectedFormattedNumber = "1.00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "T"
             )
         }
@@ -257,7 +257,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000000",
-                expectedFormattedNumber = "1.00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "Qa"
             )
         }
@@ -290,7 +290,7 @@ class EnglishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000000000",
-                expectedFormattedNumber = "1.00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "Qi"
             )
         }

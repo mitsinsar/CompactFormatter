@@ -5,14 +5,15 @@ import com.mitsinsar.peracompactdecimalformat.model.CompactDecimal
 import com.mitsinsar.peracompactdecimalformat.model.ParsedNumber
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberParser.parseNumber
-import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 
 class PeraCompactDecimalFormat internal constructor(
     private val locale: BaseLocale,
     private val style: CompactStyle,
-    private val numberFormatter: NumberFormatter
+    private val numberFormatter: NumberFormatter,
+    private val fractionalDigitCreator: FractionalDigit.FractionalDigitCreator
 ) {
 
     fun format(number: PeraDecimal): CompactDecimal {
@@ -33,7 +34,7 @@ class PeraCompactDecimalFormat internal constructor(
 
     private fun getFormattedNumber(parsedNumber: ParsedNumber): String {
         return with(parsedNumber) {
-            val fractionalDigit = FractionalDigit.create(rawNumber)
+            val fractionalDigit = fractionalDigitCreator.create(rawNumber)
             val numberToFormat = if (rawNumber < NumberConstants.MILLION.value) rawNumber else this.parsedNumber
             numberFormatter.format(numberToFormat, fractionalDigit)
         }

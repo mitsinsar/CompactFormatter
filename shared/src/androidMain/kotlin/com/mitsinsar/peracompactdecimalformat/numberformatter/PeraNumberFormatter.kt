@@ -1,9 +1,9 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter.Constants.FORMAT_PATTERN
-import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.Locale
@@ -25,7 +25,9 @@ internal actual class PeraNumberFormatter actual constructor(
     private fun getFormatter(fractionalDigit: FractionalDigit): DecimalFormat {
         return DecimalFormat(FORMAT_PATTERN, DecimalFormatSymbols(locale)).apply {
             maximumFractionDigits = fractionalDigit.maxDigit
-            minimumFractionDigits = fractionalDigit.minDigit
+            if (fractionalDigit.minDigit != null) {
+                minimumFractionDigits = fractionalDigit.minDigit
+            }
             roundingMode = peraRoundingMode.roundingMode
             if (useGrouping) {
                 decimalFormatSymbols = this@PeraNumberFormatter.decimalFormatSymbols
