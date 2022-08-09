@@ -35,6 +35,17 @@ class FiatEnglishFormatterTest : BaseLocalizedFormatterTest() {
     }
 
     @Test
+    fun checkIfLessThanTenWithSingleDecimalWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "3.4",
+                expectedFormattedNumber = "3.40",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
     fun checkIfLessThanTenWithDecimalsWorks() {
         assertTrue {
             assertFormattedNumber(
