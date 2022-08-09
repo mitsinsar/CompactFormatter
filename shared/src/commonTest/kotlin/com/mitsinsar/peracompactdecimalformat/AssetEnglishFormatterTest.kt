@@ -36,8 +36,30 @@ class AssetEnglishFormatterTest : BaseLocalizedFormatterTest() {
     fun checkIfLessThanTenWithDecimalsWorks() {
         assertTrue {
             assertFormattedNumber(
-                rawNumber = "5.2833",
+                rawNumber = "5.28334323",
                 expectedFormattedNumber = "5.2833",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithThreeDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.283",
+                expectedFormattedNumber = "5.283",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithOneDecimalWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.2",
+                expectedFormattedNumber = "5.20",
                 expectedSuffix = null
             )
         }
