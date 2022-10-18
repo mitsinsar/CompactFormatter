@@ -7,6 +7,7 @@ import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.PeraNumberParser.parseNumber
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.AssetFractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 
 class PeraCompactDecimalFormat internal constructor(
@@ -16,10 +17,12 @@ class PeraCompactDecimalFormat internal constructor(
     private val fractionalDigitCreator: FractionalDigit.FractionalDigitCreator
 ) {
 
-    fun format(number: PeraDecimal): CompactDecimal {
+    fun format(number: PeraDecimal, compactForAndAfter: NumberConstants = NumberConstants.MILLION): CompactDecimal {
         val parsedNumber = parseNumber(number)
-        val formattedNumber = getFormattedNumber(parsedNumber)
-        val localizedSuffix = getLocalizedSuffix(NumberConstants.getByIndex(parsedNumber.shiftCount))
+        val shouldCompact = parsedNumber.rawNumber >= compactForAndAfter.value
+        val formattedNumber = getFormattedNumber(parsedNumber, shouldCompact)
+        val localizedSuffix =
+            if (shouldCompact) getLocalizedSuffix(NumberConstants.getByIndex(parsedNumber.shiftCount)) else null
         return CompactDecimal(number, formattedNumber, localizedSuffix)
     }
 
@@ -32,10 +35,10 @@ class PeraCompactDecimalFormat internal constructor(
         }
     }
 
-    private fun getFormattedNumber(parsedNumber: ParsedNumber): String {
+    private fun getFormattedNumber(parsedNumber: ParsedNumber, shouldCompact: Boolean): String {
         return with(parsedNumber) {
-            val fractionalDigit = fractionalDigitCreator.create(rawNumber)
-            val numberToFormat = if (rawNumber < NumberConstants.MILLION.value) rawNumber else this.parsedNumber
+            val fractionalDigit = AssetFractionalDigit.create(rawNumber)
+            val numberToFormat = if (shouldCompact) this.parsedNumber else rawNumber
             numberFormatter.format(numberToFormat, fractionalDigit)
         }
     }
