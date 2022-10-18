@@ -82,7 +82,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000",
-                expectedFormattedNumber = "1,00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "M"
             )
         }
@@ -115,7 +115,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000.999",
-                expectedFormattedNumber = "1,00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "Mr"
             )
         }
@@ -148,7 +148,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000",
-                expectedFormattedNumber = "1,00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "T"
             )
         }
@@ -181,7 +181,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000000",
-                expectedFormattedNumber = "1,00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "Kt"
             )
         }
@@ -214,7 +214,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000000000000000000",
-                expectedFormattedNumber = "1,00",
+                expectedFormattedNumber = "1",
                 expectedSuffix = "Kn"
             )
         }
