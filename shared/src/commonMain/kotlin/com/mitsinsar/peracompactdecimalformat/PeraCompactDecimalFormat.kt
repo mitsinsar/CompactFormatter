@@ -19,15 +19,11 @@ class PeraCompactDecimalFormat internal constructor(
     fun format(number: PeraDecimal): CompactDecimal {
         val parsedNumber = parseNumber(number)
         val formattedNumber = getFormattedNumber(parsedNumber)
-        val localizedSuffix = getLocalizedSuffix(
-            numberConstants = NumberConstants.getByIndex(parsedNumber.shiftCount),
-            minimumCompactNumber = fractionalDigitCreator.minimumCompactNumber
-        )
+        val localizedSuffix = getLocalizedSuffix(NumberConstants.getByIndex(parsedNumber.shiftCount))
         return CompactDecimal(number, formattedNumber, localizedSuffix)
     }
 
-    private fun getLocalizedSuffix(numberConstants: NumberConstants, minimumCompactNumber: NumberConstants): String? {
-        if (minimumCompactNumber.ordinal > numberConstants.ordinal) return null
+    private fun getLocalizedSuffix(numberConstants: NumberConstants): String? {
         return with(locale) {
             when (style) {
                 CompactStyle.SHORT -> getShortSuffix(numberConstants)
@@ -39,11 +35,7 @@ class PeraCompactDecimalFormat internal constructor(
     private fun getFormattedNumber(parsedNumber: ParsedNumber): String {
         return with(parsedNumber) {
             val fractionalDigit = fractionalDigitCreator.create(rawNumber)
-            val numberToFormat = if (rawNumber < fractionalDigitCreator.minimumCompactNumber.value) {
-                rawNumber
-            } else {
-                this.parsedNumber
-            }
+            val numberToFormat = if (rawNumber < NumberConstants.MILLION.value) rawNumber else this.parsedNumber
             numberFormatter.format(numberToFormat, fractionalDigit)
         }
     }

@@ -20,10 +20,6 @@ abstract class FractionalDigit constructor(
     }
 
     interface FractionalDigitCreator {
-        /**
-         * [minimumCompactNumber] is the minimum number that should be applied compact number format
-         */
-        val minimumCompactNumber: NumberConstants
         fun create(number: PeraDecimal): FractionalDigit
     }
 
@@ -32,12 +28,8 @@ abstract class FractionalDigit constructor(
         private const val DEFAULT_MIN_FRACTIONAL_DIGIT = 2
 
         @JvmStatic
-        protected fun getMinFractionalDigit(
-            number: PeraDecimal,
-            maximumFractionalDigit: Int,
-            minimumCompactNumber: NumberConstants
-        ): Int? {
-            val minFractionalDigit = DEFAULT_MIN_FRACTIONAL_DIGIT.takeIf { number < minimumCompactNumber.value }
+        protected fun getMinFractionalDigit(number: PeraDecimal, maximumFractionalDigit: Int): Int? {
+            val minFractionalDigit = DEFAULT_MIN_FRACTIONAL_DIGIT.takeIf { number < NumberConstants.MILLION.value }
             return if (minFractionalDigit == null) null else minOf(maximumFractionalDigit, minFractionalDigit)
         }
     }

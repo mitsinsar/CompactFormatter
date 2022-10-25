@@ -16,7 +16,6 @@ object EnglishLocale : BaseLocale() {
         get() = ENGLISH.localeConstant
 
     override fun addSuffixes() {
-        addSuffix(THOUSAND, LocalizedSuffix("K", "Thousand"))
         addSuffix(MILLION, LocalizedSuffix("M", "Million"))
         addSuffix(BILLION, LocalizedSuffix("B", "Billion"))
         addSuffix(TRILLION, LocalizedSuffix("T", "Trillion"))
