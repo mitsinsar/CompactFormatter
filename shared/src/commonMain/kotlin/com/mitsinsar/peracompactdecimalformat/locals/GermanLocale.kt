@@ -7,6 +7,7 @@ import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.BILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.MILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUADRILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUINTILLION
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.THOUSAND
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.TRILLION
 
 object GermanLocale : BaseLocale() {
@@ -15,10 +16,11 @@ object GermanLocale : BaseLocale() {
         get() = GERMAN.localeConstant
 
     override fun addSuffixes() {
-        addSuffix(MILLION, LocalizedSuffix("M", ""))
-        addSuffix(BILLION, LocalizedSuffix("B", ""))
-        addSuffix(TRILLION, LocalizedSuffix("T", ""))
-        addSuffix(QUADRILLION, LocalizedSuffix("Qa", ""))
-        addSuffix(QUINTILLION, LocalizedSuffix("Qi", ""))
+        addSuffix(THOUSAND, LocalizedSuffix("K", "Tausend"))
+        addSuffix(MILLION, LocalizedSuffix("M", "Millionen"))
+        addSuffix(BILLION, LocalizedSuffix("B", "Milliarden"))
+        addSuffix(TRILLION, LocalizedSuffix("T", "Billionen"))
+        addSuffix(QUADRILLION, LocalizedSuffix("Qa", "Billiarden"))
+        addSuffix(QUINTILLION, LocalizedSuffix("Qi", "Trillionen"))
     }
 }

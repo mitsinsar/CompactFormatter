@@ -7,6 +7,7 @@ import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.BILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.MILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUADRILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUINTILLION
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.THOUSAND
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.TRILLION
 
 object KoreanLocale : BaseLocale() {
@@ -15,10 +16,11 @@ object KoreanLocale : BaseLocale() {
         get() = KOREAN.localeConstant
 
     override fun addSuffixes() {
-        addSuffix(MILLION, LocalizedSuffix("백만", ""))
-        addSuffix(BILLION, LocalizedSuffix("십억", ""))
-        addSuffix(TRILLION, LocalizedSuffix("조", ""))
-        addSuffix(QUADRILLION, LocalizedSuffix("1000조", ""))
-        addSuffix(QUINTILLION, LocalizedSuffix("100경", ""))
+        addSuffix(THOUSAND, LocalizedSuffix("천", "1천"))
+        addSuffix(MILLION, LocalizedSuffix("백만", "100만"))
+        addSuffix(BILLION, LocalizedSuffix("십억", "10억"))
+        addSuffix(TRILLION, LocalizedSuffix("조", "1조"))
+        addSuffix(QUADRILLION, LocalizedSuffix("1000조", "1000조"))
+        addSuffix(QUINTILLION, LocalizedSuffix("100경", "100경"))
     }
 }
