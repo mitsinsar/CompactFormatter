@@ -4,12 +4,15 @@ import com.mitsinsar.peracompactdecimalformat.locals.EnglishLocale
 import com.mitsinsar.peracompactdecimalformat.locals.base.BaseLocale
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatter
 import com.mitsinsar.peracompactdecimalformat.numberformatter.NumberFormatterBuilder
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.AssetFractionalDigit
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 
 class PeraCompactDecimalFormatBuilder(initialLocale: BaseLocale) {
 
     private var locale: BaseLocale = initialLocale
     private var style: CompactStyle = CompactStyle.SHORT
     private lateinit var numberFormatter: NumberFormatter
+    private var fractionalDigitCreator: FractionalDigit.FractionalDigitCreator = AssetFractionalDigit
 
     fun setLocale(newLocale: BaseLocale): PeraCompactDecimalFormatBuilder {
         locale = newLocale
@@ -26,12 +29,20 @@ class PeraCompactDecimalFormatBuilder(initialLocale: BaseLocale) {
         return this
     }
 
+    fun setFractionalDigitCreator(
+        newFractionalDigitCreator: FractionalDigit.FractionalDigitCreator
+    ): PeraCompactDecimalFormatBuilder {
+        fractionalDigitCreator = newFractionalDigitCreator
+        return this
+    }
+
     fun build(): PeraCompactDecimalFormat {
         setDefaultNumberFormatterIfNull()
         return PeraCompactDecimalFormat(
             locale = locale,
             style = style,
-            numberFormatter = numberFormatter
+            numberFormatter = numberFormatter,
+            fractionalDigitCreator = fractionalDigitCreator
         )
     }
 

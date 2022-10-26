@@ -1,8 +1,8 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
-import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 
 interface NumberFormatter {
 
@@ -14,6 +14,6 @@ interface NumberFormatter {
     fun format(number: PeraDecimal, fractionalDigit: FractionalDigit): String
 
     object Constants {
-        const val FORMAT_PATTERN = "0.00"
+        const val FORMAT_PATTERN = "0"
     }
 }

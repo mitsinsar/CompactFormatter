@@ -1,8 +1,8 @@
 package com.mitsinsar.peracompactdecimalformat.numberformatter
 
-import com.mitsinsar.peracompactdecimalformat.utils.FractionalDigit
 import com.mitsinsar.peracompactdecimalformat.utils.PeraDecimal
 import com.mitsinsar.peracompactdecimalformat.utils.PeraRoundingMode
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.FractionalDigit
 import platform.Foundation.NSDecimalNumber
 import platform.Foundation.NSLocale
 import platform.Foundation.NSNumberFormatter
@@ -23,7 +23,9 @@ internal actual class PeraNumberFormatter actual constructor(
         return NSNumberFormatter().apply {
             locale = NSLocale(localeConstant)
             maximumFractionDigits = fractionalDigit.maxDigit.toULong()
-            minimumFractionDigits = fractionalDigit.minDigit.toULong()
+            if (fractionalDigit.minDigit != null) {
+                minimumFractionDigits = fractionalDigit.minDigit.toULong()
+            }
             roundingMode = this@PeraNumberFormatter.peraRoundingMode.roundingMode
             if (useGrouping) {
                 numberStyle = NSNumberFormatterDecimalStyle.apply {
