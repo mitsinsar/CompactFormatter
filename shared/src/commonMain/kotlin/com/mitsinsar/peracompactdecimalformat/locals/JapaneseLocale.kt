@@ -7,6 +7,7 @@ import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.BILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.MILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUADRILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUINTILLION
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.THOUSAND
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.TRILLION
 
 object JapaneseLocale : BaseLocale() {
@@ -15,10 +16,11 @@ object JapaneseLocale : BaseLocale() {
         get() = JAPANESE.localeConstant
 
     override fun addSuffixes() {
-        addSuffix(MILLION, LocalizedSuffix("M", ""))
-        addSuffix(BILLION, LocalizedSuffix("B", ""))
-        addSuffix(TRILLION, LocalizedSuffix("T", ""))
-        addSuffix(QUADRILLION, LocalizedSuffix("Qa", ""))
-        addSuffix(QUINTILLION, LocalizedSuffix("Qi", ""))
+        addSuffix(THOUSAND, LocalizedSuffix("千", "千"))
+        addSuffix(MILLION, LocalizedSuffix("百万", "百万"))
+        addSuffix(BILLION, LocalizedSuffix("十億", "十億"))
+        addSuffix(TRILLION, LocalizedSuffix("兆", "兆"))
+        addSuffix(QUADRILLION, LocalizedSuffix("千兆", "千兆"))
+        addSuffix(QUINTILLION, LocalizedSuffix("京", "京"))
     }
 }

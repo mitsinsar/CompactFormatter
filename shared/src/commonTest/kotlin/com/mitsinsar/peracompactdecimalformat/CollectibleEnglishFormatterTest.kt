@@ -1,22 +1,122 @@
 package com.mitsinsar.peracompactdecimalformat
 
-import com.mitsinsar.peracompactdecimalformat.locals.TurkishLocale
+import com.mitsinsar.peracompactdecimalformat.utils.fractionaldigit.CollectibleFractionalDigit
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class TurkishFormatterTest : BaseLocalizedFormatterTest() {
+class CollectibleEnglishFormatterTest : BaseLocalizedFormatterTest() {
 
     init {
-        formatter = PeraCompactDecimalFormatBuilder.getInstance(TurkishLocale)
+        formatter = PeraCompactDecimalFormatBuilder.getInstance()
+            .setFractionalDigitCreator(CollectibleFractionalDigit)
             .build()
+    }
+
+    @Test
+    fun checkIfLessThanOneWithDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "0.3242123",
+                expectedFormattedNumber = "0.3",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanOneWithoutDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "0",
+                expectedFormattedNumber = "0",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.28334323",
+                expectedFormattedNumber = "5.2",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithThreeDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.283",
+                expectedFormattedNumber = "5.2",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithOneDecimalWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5.2",
+                expectedFormattedNumber = "5.2",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenWithoutDecimalsWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "5",
+                expectedFormattedNumber = "5",
+                expectedSuffix = null
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanTenThousandWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "1999",
+                expectedFormattedNumber = "1.9",
+                expectedSuffix = "K"
+            )
+        }
+    }
+
+    @Test
+    fun checkIfMoreThanTenThousandWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "10439.0000",
+                expectedFormattedNumber = "10.4",
+                expectedSuffix = "K"
+            )
+        }
+    }
+
+    @Test
+    fun checkIfLessThanMillionWorks() {
+        assertTrue {
+            assertFormattedNumber(
+                rawNumber = "559012.12512321",
+                expectedFormattedNumber = "559",
+                expectedSuffix = "K"
+            )
+        }
     }
 
     @Test
     override fun checkIfMinimumSmallNumberWorks() {
         assertTrue {
             assertFormattedNumber(
-                rawNumber = "0",
-                expectedFormattedNumber = "0,00",
+                rawNumber = "33",
+                expectedFormattedNumber = "33",
                 expectedSuffix = null
             )
         }
@@ -27,7 +127,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "214.42521321324123",
-                expectedFormattedNumber = "214,42",
+                expectedFormattedNumber = "214.4",
                 expectedSuffix = null
             )
         }
@@ -38,7 +138,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999.999999999",
-                expectedFormattedNumber = "999,99",
+                expectedFormattedNumber = "999.9",
                 expectedSuffix = null
             )
         }
@@ -49,8 +149,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "1000.0000000000",
-                expectedFormattedNumber = "1.000,00",
-                expectedSuffix = null
+                expectedFormattedNumber = "1",
+                expectedSuffix = "K"
             )
         }
     }
@@ -60,8 +160,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "541122.0124123",
-                expectedFormattedNumber = "541.122,01",
-                expectedSuffix = null
+                expectedFormattedNumber = "541.1",
+                expectedSuffix = "K"
             )
         }
     }
@@ -71,8 +171,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999.999999999",
-                expectedFormattedNumber = "999.999,99",
-                expectedSuffix = null
+                expectedFormattedNumber = "999.9",
+                expectedSuffix = "K"
             )
         }
     }
@@ -93,7 +193,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "249520000",
-                expectedFormattedNumber = "249,52",
+                expectedFormattedNumber = "249.5",
                 expectedSuffix = "M"
             )
         }
@@ -104,7 +204,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999.999",
-                expectedFormattedNumber = "999,99",
+                expectedFormattedNumber = "999.9",
                 expectedSuffix = "M"
             )
         }
@@ -116,7 +216,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000.999",
                 expectedFormattedNumber = "1",
-                expectedSuffix = "Mr"
+                expectedSuffix = "B"
             )
         }
     }
@@ -126,8 +226,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "12489000000.999",
-                expectedFormattedNumber = "12,48",
-                expectedSuffix = "Mr"
+                expectedFormattedNumber = "12.4",
+                expectedSuffix = "B"
             )
         }
     }
@@ -137,8 +237,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999999.9999999",
-                expectedFormattedNumber = "999,99",
-                expectedSuffix = "Mr"
+                expectedFormattedNumber = "999.9",
+                expectedSuffix = "B"
             )
         }
     }
@@ -159,7 +259,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "211782475000000.516316214",
-                expectedFormattedNumber = "211,78",
+                expectedFormattedNumber = "211.7",
                 expectedSuffix = "T"
             )
         }
@@ -170,7 +270,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999999999.99999999",
-                expectedFormattedNumber = "999,99",
+                expectedFormattedNumber = "999.9",
                 expectedSuffix = "T"
             )
         }
@@ -182,7 +282,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000000",
                 expectedFormattedNumber = "1",
-                expectedSuffix = "Kt"
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -192,8 +292,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "261897000000000000.42187821",
-                expectedFormattedNumber = "261,89",
-                expectedSuffix = "Kt"
+                expectedFormattedNumber = "261.8",
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -203,8 +303,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "999999999999999999.9999999999",
-                expectedFormattedNumber = "999,99",
-                expectedSuffix = "Kt"
+                expectedFormattedNumber = "999.9",
+                expectedSuffix = "Qa"
             )
         }
     }
@@ -215,7 +315,7 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
             assertFormattedNumber(
                 rawNumber = "1000000000000000000",
                 expectedFormattedNumber = "1",
-                expectedSuffix = "Kn"
+                expectedSuffix = "Qi"
             )
         }
     }
@@ -225,8 +325,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "5878674635918825120.4215213",
-                expectedFormattedNumber = "5,87",
-                expectedSuffix = "Kn"
+                expectedFormattedNumber = "5.8",
+                expectedSuffix = "Qi"
             )
         }
     }
@@ -236,8 +336,8 @@ class TurkishFormatterTest : BaseLocalizedFormatterTest() {
         assertTrue {
             assertFormattedNumber(
                 rawNumber = "18446744073709551615",
-                expectedFormattedNumber = "18,44",
-                expectedSuffix = "Kn"
+                expectedFormattedNumber = "18.4",
+                expectedSuffix = "Qi"
             )
         }
     }

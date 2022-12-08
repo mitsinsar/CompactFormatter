@@ -7,6 +7,7 @@ import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.BILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.MILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUADRILLION
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.QUINTILLION
+import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.THOUSAND
 import com.mitsinsar.peracompactdecimalformat.utils.NumberConstants.TRILLION
 
 object FrenchLocale : BaseLocale() {
@@ -15,10 +16,11 @@ object FrenchLocale : BaseLocale() {
         get() = FRENCH.localeConstant
 
     override fun addSuffixes() {
-        addSuffix(MILLION, LocalizedSuffix("M", ""))
-        addSuffix(BILLION, LocalizedSuffix("B", ""))
-        addSuffix(TRILLION, LocalizedSuffix("T", ""))
-        addSuffix(QUADRILLION, LocalizedSuffix("Qa", ""))
-        addSuffix(QUINTILLION, LocalizedSuffix("Qi", ""))
+        addSuffix(THOUSAND, LocalizedSuffix("K", "Millier"))
+        addSuffix(MILLION, LocalizedSuffix("M", "Million"))
+        addSuffix(BILLION, LocalizedSuffix("Md", "Milliard"))
+        addSuffix(TRILLION, LocalizedSuffix("B", "Billion"))
+        addSuffix(QUADRILLION, LocalizedSuffix("Bd", "Billiard"))
+        addSuffix(QUINTILLION, LocalizedSuffix("T", "Trillion"))
     }
 }
